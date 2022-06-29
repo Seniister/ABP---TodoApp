@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BasicAspNetCoreApplication.Entities;
+using Microsoft.EntityFrameworkCore;
 using TodoApp.Entities;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
@@ -18,6 +19,8 @@ public class TodoAppDbContext : AbpDbContext<TodoAppDbContext>
     {
     }
     public DbSet<TodoItem> TodoItems { get; set; }
+    public DbSet<Invoice> Invoice { get; set; }
+    public DbSet<InvoiceItem> InvoiceItem { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -33,6 +36,17 @@ public class TodoAppDbContext : AbpDbContext<TodoAppDbContext>
         builder.ConfigureFeatureManagement();
         builder.ConfigureTenantManagement();
 
+        builder
+          .Entity<Invoice>(b =>
+                           b.ToTable("Invoices"));
+        builder
+        .Entity<InvoiceItem>(b =>
+                         b.ToTable("InvoiceItems"));
+
+        builder
+        .Entity<Invoice>()
+        .Property(e => e.Type)
+        .HasConversion<string>();
         /* Configure your own entities here */
         builder.Entity<TodoItem>(b =>
         {

@@ -31,6 +31,12 @@ public class TodoAppMenuContributor : IMenuContributor
                 order: 0
             )
         );
+        context.Menu.Items.Add(new ApplicationMenuItem(
+                TodoAppMenus.Invoice,
+                "Invoice",
+                "~/invoice",
+                icon: "fa fa-file-tex"
+                ));
 
         if (TodoAppModule.IsMultiTenant)
         {

@@ -4,7 +4,7 @@
     $('#TodoList').on('click', 'li i', function () {
         var $li = $(this).parent();
         var id = $li.attr('data-id');
-
+       
         todoApp.services.todo.delete(id).then(function () {
             $li.remove();
             abp.notify.info('Deleted the todo item.');

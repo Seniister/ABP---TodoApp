@@ -1,4 +1,5 @@
-﻿using TodoApp.Services;
+﻿using Microsoft.AspNetCore.Authorization;
+using TodoApp.Services;
 using TodoApp.Services.Dtos;
 using Volo.Abp.AspNetCore.Mvc.UI.RazorPages;
 
@@ -14,7 +15,7 @@ public class IndexModel : AbpPageModel
     {
         _todoAppService = todoAppService;
     }
-
+    
     public async Task OnGetAsync()
     {
         TodoItems = await _todoAppService.GetListAsync();
